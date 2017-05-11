@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../schema/stf.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <standoff>
+      <!-- WHERE TO PUT THE POINTING ATTRIBUTE(S)? 
+      On the <app>, or on the <rdg>/<lem> ?-->
+      
+      <!-- First option -->
+      <stf xml:id="stf_app_1">
+         <app stf_target="#w10">
+            <lem wit="#A">car</lem>  
+            <rdg wit="#B">bus</rdg>
+            <rdg wit="#C">bus</rdg>
+         </app>
+         <!-- Or depending on the approach of the project, without <lem> -->
+         <app stf_target="#w10">
+            <rdg wit="#A">car</rdg>  
+            <rdg wit="#B">bus</rdg>
+            <rdg wit="#C">bus</rdg>
+         </app>
+      </stf>
+      <!--
+         The first option is maybe better in the case where there are only <rdg> and not <lem>;
+         also it seems easier to process; and it is more coherent with the other <stf>, where the target attribute is on the direct child.
+      -->
+      
+      <!-- Second option -->
+      <stf xml:id="stf_app_2">
+         <app>
+            <lem stf_target="#w10"/> 
+            <rdg wit="#B">bus</rdg>
+            <rdg wit="#C">bus</rdg>
+         </app>
+         <!-- Or depending on the approach of the project, without <lem> -->
+         <app>
+            <rdg stf_target="#w10"/> 
+            <rdg wit="#B">bus</rdg>
+            <rdg wit="#C">bus</rdg>
+         </app>
+      </stf>      
+      <!-- 
+         The second otpion seems more approriate when there is a <lem> and the base text is representing a single witness, not a critical text.
+      -->
+      
+      
+      <!-- THE REVIEWER IS CONCERNED WITH OVERLAPPING APPS (which, contrary to what s/he said, I don't think happen very often, but anyway let's address her concerns).
+      I tried to imagine a case for it, for example with overlapping apps for different categories of variation. 
+      In the example below, app registering typographical variants and morphological variants are kept on two separate layers (so they can also overlap)-->
+      
+      <stf xml:id="stf_appTypogr">  <!--  -->
+         <app stf_from="#w2" stf_to="#w3">
+            <lem wit="#A">Sunday we</lem>
+            <rdg wit="#B">Sunday you</rdg>
+            <rdg wit="#C">sunday YOU</rdg>
+         </app>
+         <app>
+            <!-- more typographical variants -->
+         </app>
+      </stf>      
+      <stf xml:id="stf_appMorph">
+         <app stf_from="#w3" stf_to="#w4">
+            <lem wit="#A">we shall</lem>
+            <rdg wit="#B">you will</rdg>
+            <rdg wit="#C">you will</rdg>
+         </app>  
+         <app>
+            <!-- more morphological variants -->
+         </app>
+      </stf>
+      
+      
+      <!-- Eventually, I don't think that we need to give an example of overlapping apps in the paper, 
+         we can just put in a footnote that overlapping apps, as any other overlapping structure, 
+         should be kept in separate layers.
+         What we need to put in the paper is an example of APP, a normal one, now on page 6 of the paper.
+      -->
+      
+      
+   </standoff>
+   <stf_text>
+      <div>
+         <seg xml:id="w1">On</seg>
+         <seg xml:id="w2">Sunday</seg>
+         <seg xml:id="w3">we</seg>
+         <seg xml:id="w4">shall</seg>
+         <seg xml:id="w5">go</seg>
+         <seg xml:id="w6">to</seg>
+         <seg xml:id="w7">the</seg>
+         <seg xml:id="w8">beach</seg>
+         <seg xml:id="w9">by</seg>
+         <seg xml:id="w10">car</seg>
+      </div>
+   </stf_text>
+   
+   <!--  
+         On Sunday we shall go to the beach by car
+         On Sunday you will go to the beach by car
+         On sunday YOU will go to the beach by car
+   -->
+   
+</TEI>
